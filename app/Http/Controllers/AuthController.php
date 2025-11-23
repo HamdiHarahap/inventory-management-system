@@ -11,7 +11,9 @@ class AuthController extends Controller
 {
     public function loginView()
     {
-        return view('auth.login');
+        return view('auth.login', [
+            'title' => 'Halaman Login',
+        ]);
     }
 
     public function login(Request $request)
@@ -30,5 +32,12 @@ class AuthController extends Controller
         Auth::login($user);
 
         return redirect()->route('dashboard');
+    }
+
+    public function logout() 
+    {
+        Auth::logout();
+
+        return redirect()->route('login');
     }
 }
