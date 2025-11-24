@@ -31,7 +31,7 @@
                             {{ $title == 'Produk' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
                             Produk
                         </a>
-                        <a href="#"
+                        <a href="{{ route('category.index') }}"
                             class="block px-4 py-2 rounded-lg transition
                             {{ $title == 'Kategori' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
                             Kategori
