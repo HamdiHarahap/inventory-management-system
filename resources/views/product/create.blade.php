@@ -10,12 +10,14 @@
                     <div class="flex flex-col">
                         <label class="font-medium text-gray-700 mb-1">Nama Produk</label>
                         <input type="text"
+                            name="name"
                             class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition shadow-sm"
                             placeholder="Masukkan nama produk">
                     </div>
                     <div class="flex flex-col">
                         <label class="font-medium text-gray-700 mb-1">Kategori</label>
                         <select
+                            name="category"
                             class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition shadow-sm">
                             <option value="">Pilih Kategori</option>
                             <option value="minuman">Minuman</option>
@@ -26,36 +28,42 @@
                     <div class="flex flex-col">
                         <label class="font-medium text-gray-700 mb-1">SKU</label>
                         <input type="text"
+                            name="sku"
                             class="px-4 py-3 border rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-500 shadow-sm"
                             placeholder="Contoh: PRD-001">
                     </div>
                     <div class="flex flex-col">
                         <label class="font-medium text-gray-700 mb-1">Barcode</label>
                         <input type="text"
+                            name="barcode"
                             class="px-4 py-3 border rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-500 shadow-sm"
                             placeholder="Masukkan barcode">
                     </div>
                     <div class="flex flex-col">
                         <label class="font-medium text-gray-700 mb-1">Harga Jual</label>
                         <input type="number"
+                            name="price_sell"
                             class="px-4 py-3 border rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-500 shadow-sm"
                             placeholder="Masukkan harga jual">
                     </div>
                     <div class="flex flex-col">
                         <label class="font-medium text-gray-700 mb-1">Harga Beli</label>
                         <input type="number"
+                            name="price_buy"
                             class="px-4 py-3 border rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-500 shadow-sm"
                             placeholder="Masukkan harga beli">
                     </div>
                     <div class="flex flex-col">
                         <label class="font-medium text-gray-700 mb-1">Unit</label>
                         <input type="text"
+                            name="units"
                             class="px-4 py-3 border rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-500 shadow-sm"
                             placeholder="Contoh: pcs, dus, pack">
                     </div>
                     <div class="flex flex-col">
                         <label class="font-medium text-gray-700 mb-1">Stok</label>
                         <input type="number"
+                            name="stock"
                             class="px-4 py-3 border rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-500 shadow-sm"
                             placeholder="Jumlah stok">
                     </div>
@@ -65,6 +73,7 @@
 
                     <div class="border rounded-xl p-4 bg-gray-50 hover:bg-gray-100 transition cursor-pointer">
                         <input type="file"
+                            name="image"
                             class="w-full bg-transparent focus:outline-none">
                     </div>
                 </div>
