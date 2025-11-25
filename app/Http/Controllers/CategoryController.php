@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -19,7 +21,6 @@ class CategoryController extends Controller
         return view('category.index', [
             'title' => 'Kategori',
             'data' => $data,
-            'keyword' => $q
         ]);
     }
 
@@ -43,6 +44,12 @@ class CategoryController extends Controller
             'description' => $request->input('description')
         ]);
 
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'Menambah kategori',
+            'description' => "Menambahkan kategori baru '$request->name'"
+        ]);
+
         return redirect()->route('category.index')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
@@ -62,20 +69,50 @@ class CategoryController extends Controller
         ]);
 
         $data = Category::find($id);
+
+        $oldName = $data->name;
+        $oldDescription = $data->description;
+
         $data->update([
             'name' => $request->input('name'),
             'description' => $request->input('description')
         ]);
 
-        $name = $request->input('name');
+        $changes = [];
 
-        return redirect()->route('category.index')->with('success', "$name berhasil diupdate");
+        if ($oldName !== $request->name) {
+            $changes[] = "nama dari '$oldName' menjadi '{$request->name}'";
+        }
+
+        if ($oldDescription !== $request->description) {
+            $changes[] = "deskripsi dari '$oldDescription' menjadi '{$request->description}'";
+        }
+
+        $description = count($changes) > 0
+            ? 'Mengupdate kategori: ' . implode(' dan ', $changes)
+            : 'Tidak ada perubahan';
+
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'Mengupdate kategori',
+            'description' => $description
+        ]);
+
+        return redirect()->route('category.index')->with('success', "$request->name berhasil diupdate");
     }
+
+
 
     public function destroy(string $id)
     {
         $data = Category::find($id);
         $data->delete();
+
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'Menghapus kategori',
+            'description' => "Menghapus kategori '$data->name'"
+        ]);
 
         return redirect()->route('category.index')->with('success', "$data->name berhasil dihapus");
     }
