@@ -26,20 +26,20 @@
                         <span class="group-open:rotate-180 transition"><img src="assets/images/arrow_down.svg" alt="" class="w-6"></span>
                     </summary>
                     <div class="ml-4 mt-2 flex flex-col gap-2">
-                        <a href="{{ route('product.index') }}"
-                            class="block px-4 py-2 rounded-lg transition
-                            {{ $title == 'Produk' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
-                            Produk
-                        </a>
                         <a href="{{ route('category.index') }}"
                             class="block px-4 py-2 rounded-lg transition
                             {{ $title == 'Kategori' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
                             Kategori
                         </a>
-                        <a href="#"
+                        <a href="{{ route('product.index') }}"
                             class="block px-4 py-2 rounded-lg transition
-                            {{ $title == 'Users' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
-                            Users
+                            {{ $title == 'Produk' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
+                            Produk
+                        </a>
+                        <a href="{{ route('user.index') }}"
+                            class="block px-4 py-2 rounded-lg transition
+                            {{ $title == 'Pengguna' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
+                            Pengguna
                         </a>
                         <a href="#"
                             class="block px-4 py-2 rounded-lg transition
@@ -82,7 +82,7 @@
                         </a>
                     </div>
                 </details>
-                <a href="#"
+                <a href="{{ route('activity.index') }}"
                     class="transition block px-4 py-2 rounded-lg
                     {{ $title == 'Aktivitas' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
                     Aktivitas
