@@ -64,17 +64,14 @@
         document.addEventListener("DOMContentLoaded", function () {
             const alertBox = document.getElementById("alert-success");
             if (alertBox) {
-                // tampilkan
                 setTimeout(() => {
                     alertBox.style.opacity = "1";
                 }, 50);
 
-                // hilangkan setelah 3 detik
                 setTimeout(() => {
                     alertBox.style.opacity = "0";
                 }, 3000);
 
-                // hapus dari DOM setelah animasi hilang (500ms)
                 setTimeout(() => {
                     alertBox.remove();
                 }, 3500);
