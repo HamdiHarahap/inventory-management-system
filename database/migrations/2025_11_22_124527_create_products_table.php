@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('price_buy');
             $table->string('price_sell');
             $table->integer('stock');
-            $table->integer('stock_minimum');
             $table->string('image')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
