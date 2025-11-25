@@ -1,0 +1,43 @@
+<x-layout :title="$title">
+    <div class="p-6 md:p-10">
+        <div class="mb-4">
+            <form method="GET" class="flex items-center gap-2">
+                @csrf
+                <input type="text" name="keyword" placeholder="Cari aktivitas..."
+                    class="px-4 py-2 border border-gray-300 rounded-lg w-full focus:ring-indigo-500 focus:border-indigo-500">
+                <button class="px-4 py-2 bg-gray-200 border border-gray-300 rounded-lg hover:bg-gray-300 transition">
+                    Cari
+                </button>
+            </form>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-auto">
+            <table class="w-full text-left min-w-max">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-gray-700 font-medium">No</th>
+                        <th class="px-6 py-3 text-gray-700 font-medium">Nama Pengguna</th>
+                        <th class="px-6 py-3 text-gray-700 font-medium">Aksi</th>
+                        <th class="px-6 py-3 text-gray-700 font-medium">Deskripsi</th>
+                        <th class="px-6 py-3 text-gray-700 font-medium">Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    @php $no = 1; @endphp
+                    @foreach ($data as $item)
+                        <tr>
+                            <td class="px-6 py-4">{{ $no++ }}</td>
+                            <td class="px-6 py-4">{{ $item->user->name }}</td>
+                            <td class="px-6 py-4">{{ $item->action }}</td>
+                            <td class="px-6 py-4 max-w-xs whitespace-normal">
+                                {{ $item->description }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ \Carbon\Carbon::parse($item->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</x-layout>
