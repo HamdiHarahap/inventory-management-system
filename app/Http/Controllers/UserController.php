@@ -14,15 +14,28 @@ class UserController extends Controller
     {
         $q = $request->keyword;
 
-        $data = User::where('role', '!=', 'admin')
+        if(Auth::user()->role == 'admin') {
+            $data = User::where('role', '!=', 'admin')
             ->when($q, function ($query) use ($q) {
                 $query->where(function ($sub) use ($q) {
                     $sub->where('name', 'like', "%$q%")
-                        ->orWhere('role', 'like', "%$q%");
+                    ->orWhere('role', 'like', "%$q%");
                 });
             })
             ->get();
+        }
 
+        if(Auth::user()->role == 'manager') {
+            $data = User::where('role', '!=', 'manager')
+            ->when($q, function ($query) use ($q) {
+                $query->where(function ($sub) use ($q) {
+                    $sub->where('name', 'like', "%$q%")
+                    ->orWhere('role', 'like', "%$q%");
+                });
+            })
+            ->get();
+        }
+            
         return view('user.index', [
             'title' => 'Pengguna',
             'data'  => $data,
