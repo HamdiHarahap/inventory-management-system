@@ -1,3 +1,7 @@
+@php
+    $role = auth()->user()->role;
+@endphp
+
 <x-layout :title="$title">
     <div class="p-6 md:p-10">
         
@@ -12,7 +16,7 @@
             <h1 class="text-2xl font-bold text-gray-800">Data Pengguna</h1>
 
             <a href="{{ route('user.create') }}"
-                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition {{$role == 'admin' ? '' : 'hidden' }}">
                 + Tambah Pengguna
             </a>
         </div>
@@ -37,7 +41,7 @@
                         <th class="px-6 py-3 text-gray-700 font-medium">Nama</th>
                         <th class="px-6 py-3 text-gray-700 font-medium">Email</th>
                         <th class="px-6 py-3 text-gray-700 font-medium">Role</th>
-                        <th class="px-6 py-3 text-gray-700 font-medium">Aksi</th>
+                        <th class="px-6 py-3 text-gray-700 font-medium {{$role == 'admin' ? '' : 'hidden' }}">Aksi</th>
                     </tr>
                 </thead>
 
@@ -50,7 +54,7 @@
                             <td class="px-6 py-4">{{ $item->email }}</td>
                             <td class="px-6 py-4">{{ $item->role }}</td>
 
-                            <td class="px-6 py-4 flex items-center gap-3">
+                            <td class="px-6 py-4 flex items-center gap-3 {{$role == 'admin' ? '' : 'hidden' }}">
                                 <a href="{{ route('user.edit', ['id'=>$item->id]) }}"
                                     class="text-indigo-600 hover:underline">Edit</a>
 
