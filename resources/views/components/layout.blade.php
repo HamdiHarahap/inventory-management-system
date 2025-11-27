@@ -41,7 +41,12 @@
                             {{ $title == 'Pengguna' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
                             Pengguna
                         </a>
-                        <a href="#"
+                        <a href="{{ route('customer.index') }}"
+                            class="block px-4 py-2 rounded-lg transition
+                            {{ $title == 'Customer' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
+                            Customer
+                        </a>
+                        <a href="{{ route('supplier.index') }}"
                             class="block px-4 py-2 rounded-lg transition
                             {{ $title == 'Supplier' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
                             Supplier
