@@ -101,8 +101,6 @@ class CategoryController extends Controller
         return redirect()->route('category.index')->with('success', "$request->name berhasil diupdate");
     }
 
-
-
     public function destroy(string $id)
     {
         $data = Category::find($id);
