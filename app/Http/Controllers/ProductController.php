@@ -28,7 +28,10 @@ class ProductController extends Controller
 
     public function create()
     {
-        $sku = 'PRD-' . strtoupper(Str::random(6));
+        $last = Product::latest()->first();
+        $number = $last ? intval(substr($last->sku, 4)) + 1 : 1;
+        $sku = 'PRD-' . str_pad($number, 6, '0', STR_PAD_LEFT);
+
 
         $barcode = '';
         for ($i = 0; $i < 13; $i++) {
