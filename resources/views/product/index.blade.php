@@ -1,3 +1,7 @@
+@php
+    $role = auth()->user()->role;
+@endphp
+
 <x-layout :title="$title">
     <div class="p-6 md:p-10">
         @if (session('success'))
@@ -11,7 +15,7 @@
             <h1 class="text-2xl font-bold text-gray-800">Data Produk</h1>
 
             <a href="{{ route('product.create') }}"
-                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition {{$role == 'admin' ? '' : 'hidden' }}">
                 + Tambah Produk
             </a>
         </div>
@@ -31,14 +35,14 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-gray-700 font-medium">SKU</th>
-                        <th class="px-6 py-3 text-gray-700 font-medium">Nama</th>
-                        <th class="px-6 py-3 text-gray-700 font-medium">Kategori</th>
+                        <th class="px-6 py-3 text-gray-700 font-medium w-44">Nama</th>
+                        <th class="px-6 py-3 text-gray-700 font-medium w-32">Kategori</th>
                         <th class="px-6 py-3 text-gray-700 font-medium">Unit</th>
                         <th class="px-6 py-3 text-gray-700 font-medium">Harga Beli</th>
                         <th class="px-6 py-3 text-gray-700 font-medium">Harga Jual</th>
                         <th class="px-6 py-3 text-gray-700 font-medium">Stok</th>
                         <th class="px-6 py-3 text-gray-700 font-medium">Gambar</th>
-                        <th class="px-6 py-3 text-gray-700 font-medium">Aksi</th>
+                        <th class="px-6 py-3 text-gray-700 font-medium {{$role == 'admin' ? '' : 'hidden' }}">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -59,8 +63,12 @@
                                     <span class="px-3 py-1 text-sm rounded-full bg-red-100 text-red-700">Habis</span>
                                 @endif
                             </td>
-                            <td class="px-6 py-4"><img src="{{ asset('storage/' . $item->image) }}" alt="" class="w-20"></td>
-                            <td class="px-6 py-4 align-middle">
+                            @if ($item->image)
+                                <td class="px-6 py-4"><img src="{{ asset('storage/' . $item->image) }}" alt="" class="w-20"></td>
+                            @else
+                                <td class="px-6 py-4">-</td>
+                            @endif
+                            <td class="px-6 py-4 align-middle {{$role == 'admin' ? '' : 'hidden' }}">
                                 <div class="flex gap-3 items-center">
                                     <a href="{{ route('product.edit', ['id'=>$item->id]) }}" class="text-indigo-600 hover:underline">Edit</a>
                                     <form method="POST" action="{{ route('product.destroy', ['id'=>$item->id]) }}">
