@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('barcode');
             $table->string('name');
             $table->string('unit');
-            $table->string('price_buy');
-            $table->string('price_sell');
+            $table->decimal('price_buy', 15, 2);
+            $table->decimal('price_sell', 15, 2);
             $table->integer('stock');
             $table->string('image')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');

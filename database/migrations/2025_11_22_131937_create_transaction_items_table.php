@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('transaction_items', function (Blueprint $table) {
             $table->id();
-            $table->enum('transaction_type', ['icoming', 'outgoing']);
+            $table->enum('transaction_type', ['incoming', 'outgoing']);
             $table->integer('transaction_id');
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->integer('qty');
-            $table->decimal('price');
-            $table->decimal('subtotal');
+            $table->decimal('subtotal', 15, 2);
             $table->timestamps();
         });
     }
