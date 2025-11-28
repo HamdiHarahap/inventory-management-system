@@ -60,12 +60,7 @@
                         <span class="group-open:rotate-180 transition"><img src="assets/images/arrow_down.svg" alt="" class="w-6"></span>
                     </summary>
                     <div class="ml-4 mt-2 flex flex-col gap-2">
-                        <a href="#"
-                            class="block px-4 py-2 rounded-lg transition
-                            {{ $title == 'Transaksi' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
-                            Transaksi
-                        </a>
-                        <a href="#"
+                        <a href="{{ route('incoming.index') }}"
                             class="block px-4 py-2 rounded-lg transition
                             {{ $title == 'Transaksi Masuk' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
                             Transaksi Masuk
