@@ -15,14 +15,15 @@ class TransactionItem extends Model
         'subtotal'
     ];
 
-    public function incoming() 
+    public function incoming()
     {
-        return $this->belongsTo(IncomingTransaction::class)->where('transaction_type', 'incoming');
+        return $this->belongsTo(IncomingTransaction::class, 'transaction_id');
     }
+
 
     public function outgoing() 
     {
-        return $this->belongsTo(OutgoingTransaction::class)->where('transaction_type', 'outgoing');
+        return $this->belongsTo(OutgoingTransaction::class);
     }
     
     public function product()
