@@ -6,6 +6,7 @@ use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IncomingTransactionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
@@ -51,12 +52,19 @@ Route::middleware('auth')->group(function () {
         Route::delete('/supplier/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
     });
 
+    Route::middleware('role:staff')->group(function () {
+        Route::get('/tambah-transaksi-masuk', [IncomingTransactionController::class, 'create'])->name('incoming.create');
+        Route::post('/tambah-transaksi-masuk', [IncomingTransactionController::class, 'store'])->name('incoming.store');
+    });
+
     Route::get('/kategori', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/produk', [ProductController::class, 'index'])->name('product.index');
     Route::get('/pengguna', [UserController::class, 'index'])->name('user.index');
     Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
     Route::get('/aktivitas', [ActivityLogController::class, 'index'])->name('activity.index');
+
+    Route::get('/transaksi-masuk', [IncomingTransactionController::class, 'index'])->name('incoming.index');
 
     Route::get('/barcode/{code}', [BarcodeController::class, 'generateBarcode']);
 
