@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('outgoing_transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('supplier_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->date('date');
             $table->text('notes');
             $table->timestamps();
