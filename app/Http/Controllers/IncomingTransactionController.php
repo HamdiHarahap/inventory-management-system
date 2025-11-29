@@ -12,13 +12,29 @@ use Illuminate\Support\Facades\Auth;
 
 class IncomingTransactionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $q = $request->input('keyword');
+
+        $data = TransactionItem::where('transaction_type', 'incoming')
+            ->with(['incoming.supplier', 'product'])
+            ->when($q, function ($query) use ($q) {
+
+                $query->whereHas('incoming.supplier', function($q2) use ($q) {
+                    $q2->where('name', 'like', "%$q%");
+                })
+                ->orWhereHas('product', function($q3) use ($q) {
+                    $q3->where('name', 'like', "%$q%");
+                })
+                ->orWhereHas('outgoing', function($q4) use ($q) {
+                    $q4->where('date', 'like', "%$q%");
+                });
+            })
+            ->get();
+
         return view('transaction.incoming.index', [
             'title' => 'Transaksi Masuk',
-            'data' => TransactionItem::where('transaction_type', 'incoming')
-                        ->with(['incoming.supplier'])
-                        ->get()
+            'data' => $data,
         ]);
     }
 
