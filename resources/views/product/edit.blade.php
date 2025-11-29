@@ -70,14 +70,6 @@
                             class="px-4 py-3 border rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-500 shadow-sm"
                             placeholder="Contoh: pcs, dus, pack">
                     </div>
-                    <div class="flex flex-col">
-                        <label class="font-medium text-gray-700 mb-1">Stok</label>
-                        <input type="number"
-                            name="stock"
-                            value="{{$data->stock}}"
-                            class="px-4 py-3 border rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-500 shadow-sm"
-                            placeholder="Jumlah stok">
-                    </div>
                 </div>
                 <div class="flex flex-col">
                     <label class="font-medium text-gray-700 mb-1">Foto Produk</label>
