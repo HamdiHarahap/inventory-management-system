@@ -59,19 +59,6 @@
                             <td class="px-6 py-4">Rp {{ number_format($item->subtotal, 0, ',', '.') }}</td>
                             <td class="px-6 py-4"> {{ \Carbon\Carbon::parse($item->date)->locale('id')->isoFormat('D MMMM YYYY') }}</td>
                             <td class="px-6 py-4">{{ $item->incoming->notes }}</td>
-                            <td class="px-6 py-4 flex gap-3 {{$role == 'admin' ? '' : 'hidden' }}">
-                                <a href="{{ route('customer.edit', ['id'=>$item->id]) }}" 
-                                   class="text-indigo-600 hover:underline">Edit</a>
-
-                                <form method="POST" action="{{ route('customer.destroy', ['id'=>$item->id]) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:underline"
-                                        onclick="return confirm('Anda yakin ingin menghapus supplier ini?')">
-                                        Hapus
-                                    </button>
-                                </form>
-                            </td>
                         </tr>
                     @endforeach
                 </tbody>
