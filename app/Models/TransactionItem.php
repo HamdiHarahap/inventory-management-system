@@ -23,7 +23,7 @@ class TransactionItem extends Model
 
     public function outgoing() 
     {
-        return $this->belongsTo(OutgoingTransaction::class);
+        return $this->belongsTo(OutgoingTransaction::class, 'transaction_id');
     }
     
     public function product()
