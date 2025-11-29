@@ -1,5 +1,8 @@
 @props(['title'])
 
+@php
+    $role = auth()->user()->role;
+@endphp
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -38,7 +41,7 @@
                         </a>
                         <a href="{{ route('user.index') }}"
                             class="block px-4 py-2 rounded-lg transition
-                            {{ $title == 'Pengguna' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
+                            {{ $title == 'Pengguna' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }} {{$role == 'admin' ? '' : 'hidden' }}">
                             Pengguna
                         </a>
                         <a href="{{ route('customer.index') }}"
@@ -65,26 +68,21 @@
                             {{ $title == 'Transaksi Masuk' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
                             Transaksi Masuk
                         </a>
-                        <a href="#"
+                        <a href="{{ route('outgoing.index') }}"
                             class="block px-4 py-2 rounded-lg transition
                             {{ $title == 'Transaksi Keluar' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
                             Transaksi Keluar
                         </a>
-                        <a href="#"
+                        <a href="{{ route('stock.index') }}"
                             class="block px-4 py-2 rounded-lg transition
-                            {{ $title == 'Transaksi Item' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
-                            Transaksi Item
-                        </a>
-                        <a href="#"
-                            class="block px-4 py-2 rounded-lg transition
-                            {{ $title == 'Ubah Stok' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
+                            {{ $title == 'Ubah Stok' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}  {{$role == 'admin' ? '' : 'hidden' }}">
                             Ubah Stok
                         </a>
                     </div>
                 </details>
                 <a href="{{ route('activity.index') }}"
                     class="transition block px-4 py-2 rounded-lg
-                    {{ $title == 'Aktivitas' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}">
+                    {{ $title == 'Aktivitas' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}  {{$role == 'admin' ? '' : 'hidden' }}">
                     Aktivitas
                 </a>
             </nav>
@@ -120,9 +118,7 @@
                         x-transition
                         class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-md py-2 z-20"
                     >
-                        <a href="/profile" class="block px-4 py-2 hover:bg-gray-100 text-gray-700">Profile</a>
                         <a href="/change-password" class="block px-4 py-2 hover:bg-gray-100 text-gray-700">Change Password</a>
-
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600">
