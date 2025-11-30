@@ -42,7 +42,7 @@
                         <th class="px-6 py-3 text-gray-700 font-medium">Harga Jual</th>
                         <th class="px-6 py-3 text-gray-700 font-medium">Stok</th>
                         <th class="px-6 py-3 text-gray-700 font-medium">Gambar</th>
-                        <th class="px-6 py-3 text-gray-700 font-medium {{$role == 'admin' ? '' : 'hidden' }}">Aksi</th>
+                        <th class="px-6 py-3 text-gray-700 font-medium">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -68,8 +68,8 @@
                             @else
                                 <td class="px-6 py-4">-</td>
                             @endif
-                            <td class="px-6 py-4 align-middle {{$role == 'admin' ? '' : 'hidden' }}">
-                                <div class="flex gap-3 items-center">
+                            <td class="px-6 py-4 align-middle">
+                                <div class="flex gap-3 items-center {{$role == 'admin' ? '' : 'hidden' }}">
                                     <a href="{{ route('product.edit', ['id'=>$item->id]) }}" class="text-indigo-600 hover:underline">Edit</a>
                                     <form method="POST" action="{{ route('product.destroy', ['id'=>$item->id]) }}">
                                         @csrf
