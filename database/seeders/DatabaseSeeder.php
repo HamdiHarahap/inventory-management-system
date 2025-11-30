@@ -16,12 +16,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+         $users = [
+            ['Admin', 'admin@gmail.com', 'admin'],
+            ['Staff 1', 'staf1@gmail.com', 'staff'],
+            ['Staff 2', 'staff2@gmail.com', 'staff'],
+            ['Manager', 'manager@gmail.com', 'manager'],
+        ];
 
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('123')
-        ]);
+        foreach ($users as [$name, $email, $role]) {
+            User::create([
+                'name' => $name,
+                'email' => $email,
+                'password' => Hash::make('123'),
+                'role' => $role,
+            ]);
+        }
     }
 }
