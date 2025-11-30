@@ -66,11 +66,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/tambah-transaksi-keluar', [OutgoingTransactionController::class, 'store'])->name('outgoing.store');
     });
 
+    Route::middleware('role:manager')->group(function () {
+        Route::get('/aktivitas', [ActivityLogController::class, 'index'])->name('activity.index');
+    });
+
     Route::get('/kategori', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/produk', [ProductController::class, 'index'])->name('product.index');
     Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
-    Route::get('/aktivitas', [ActivityLogController::class, 'index'])->name('activity.index');
 
     Route::get('/transaksi-masuk', [IncomingTransactionController::class, 'index'])->name('incoming.index');
     Route::get('/transaksi-keluar', [OutgoingTransactionController::class, 'index'])->name('outgoing.index');
