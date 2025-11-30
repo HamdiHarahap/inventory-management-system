@@ -15,7 +15,7 @@
             <h1 class="text-2xl font-bold text-gray-800">Data Transaksi Masuk</h1>
 
             <a href="{{ route('incoming.create') }}"
-                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition {{$role == 'admin' ? 'hidden' : '' }}">
+                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition {{$role == 'staff' ? '' : 'hidden' }}">
                 + Tambah Transaksi Masuk
             </a>
         </div>
@@ -43,7 +43,6 @@
                         <th class="px-6 py-3 text-gray-700 font-medium">Subtotal</th>
                         <th class="px-6 py-3 text-gray-700 font-medium">Tanggal</th>
                         <th class="px-6 py-3 text-gray-700 font-medium">Catatan</th>
-                        <th class="px-6 py-3 text-gray-700 font-medium {{$role == 'admin' ? '' : 'hidden' }}">Aksi</th>
                     </tr>
                 </thead>
 
