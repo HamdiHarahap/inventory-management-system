@@ -7,6 +7,7 @@ Inventory Management System adalah aplikasi berbasis web yang dibangun menggunak
 -   [Pendahuluan](#pendahuluan)
 -   [Fitur](#fitur)
 -   [Teknologi yang Digunakan](#teknologi-yang-digunakan)
+-   [Alur Transaksi](#alur-transaksi)
 -   [Instalasi](#instalasi)
 -   [Konfigurasi](#konfigurasi)
 -   [Penggunaan](#penggunaan)
@@ -15,21 +16,71 @@ Inventory Management System adalah aplikasi berbasis web yang dibangun menggunak
 
 Inventory Management System ini menyediakan solusi berbasis web untuk mengelola barang inventaris, stok, dan data terkait lainnya. Proyek ini dibangun menggunakan kerangka kerja modern PHP yaitu Laravel, dengan struktur aplikasi yang jelas dan mudah dikembangkan.
 
+Aplikasi ini cocok digunakan untuk:
+
+-   Toko retail
+-   Gudang
+-   Distributor
+-   UMKM
+
 ## Fitur
 
--   CRUD lengkap untuk pengelolaan barang (create, read, update, delete)
--   Antarmuka web menggunakan Laravel & Blade Templates
--   Routing, database, dan konfigurasi standar Laravel
--   Struktur folder mengikuti standar Laravel (app, config, database, public, resources, routes, dll.)
--   Tersedia file contoh konfigurasi `.env.example`
--   Direktori `tests/` disediakan untuk pengujian (jika diperlukan)
+-   Manajemen Produk
+    -   SKU otomatis (Format: PRD-000001)
+    -   Barcode otomatis (13 digit)
+    -   Harga beli & harga jual
+    -   Update stok otomatis
+-   Manajemen Kategori
+    -   Kategori produk agar data lebih terorganisasi
+-   Manajemen Supplier & Customer
+-   Transaksi Masuk
+    -   Pilih supplier
+    -   Tambah item produk
+    -   Stok bertambah otomatis
+-   Transaksi Keluar
+    -   Pilih customer
+    -   Validasi stok tidak boleh minus
+    -   Stok berkurang otomatis
+-   Log Aktivitas
+    -   Pencatatan semua aktivitas (tambah, ubah, hapus, transaksi)
+-   Antarmuka Modern
+    -   Menggunakan Blade + TailwindCSS
 
 ## Teknologi yang Digunakan
 
 -   **Backend:** PHP, Laravel Framework
 -   **Frontend / Template:** Blade Template Engine
 -   **Dependencies & Tooling:** Composer, NPM (jika frontend asset memerlukan)
--   **Database:** Dapat dikonfigurasi via Laravel (MySQL / PostgreSQL / SQLite)
+-   **Database:** MySQL
+
+## Alur Transaksi
+
+### Transaksi Masuk
+
+-   Staff membuka halaman Transaksi Masuk
+-   Pilih Supplier
+-   Pilih Produk dan isi Qty
+-   Harga otomatis menggunakan price_buy dari produk
+-   Klik Simpan
+-   Sistem akan:
+    -   Menambah record transaksi masuk
+    -   Menambah detail item di transaction_items
+    -   Mengupdate stok bertambah
+    -   Mencatat activity log
+
+### Transaksi Keluar
+
+-   Staff membuka halaman Transaksi Keluar
+-   Pilih Customer
+-   Pilih Produk dan Qty
+-   Harga menggunakan price_sell
+-   Simpan
+-   Sistem akan:
+    -   Memvalidasi stok cukup
+    -   Menambah record outgoing transaction
+    -   Menambah detail item
+    -   Mengurangi stok
+    -   Mencatat activity log
 
 ## Instalasi
 
@@ -60,6 +111,32 @@ Inventory Management System ini menyediakan solusi berbasis web untuk mengelola 
     composer run dev
     ```
 
+## Akun Demo
+
+### Manager
+
+```bash
+email: manager@gmail.com
+password: 123
+```
+
+### Admin
+
+```bash
+email: admin@gmail.com
+password: 123
+```
+
+### Staff
+
+```bash
+email: staf1@gmail.com
+password: 123
+
+email: staff2@gmail.com
+password: 123
+```
+
 ## Penggunaan
 
 Setelah aplikasi berjalan, buka browser dan akses:
@@ -67,3 +144,11 @@ Setelah aplikasi berjalan, buka browser dan akses:
 ```bash
 http://127.0.0.1:8000
 ```
+
+Login menggunakan akun demo
+Setelah masuk, anda dapat:
+
+-   Mengelola data master (Produk, Supplier, Customer, Kategori)
+-   Membuat transaksi masuk & keluar
+-   Memeriksa log aktivitas
+-   Melihat stok terkini dari setiap produk
