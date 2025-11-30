@@ -82,7 +82,7 @@
                 </details>
                 <a href="{{ route('activity.index') }}"
                     class="transition block px-4 py-2 rounded-lg
-                    {{ $title == 'Aktivitas' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}  {{$role == 'admin' ? '' : 'hidden' }}">
+                    {{ $title == 'Aktivitas' ? 'bg-gray-100 text-indigo-600' : 'hover:text-indigo-600' }}  {{$role == 'manager' ? '' : 'hidden' }}">
                     Aktivitas
                 </a>
             </nav>
@@ -118,7 +118,6 @@
                         x-transition
                         class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-md py-2 z-20"
                     >
-                        <a href="/change-password" class="block px-4 py-2 hover:bg-gray-100 text-gray-700">Change Password</a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600">
