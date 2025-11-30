@@ -1,3 +1,6 @@
+@php
+    $role = auth()->user()->role;
+@endphp
 <x-layout :title="$title">
     <div class="p-6 md:p-10">
         <p class="text-gray-600">Selamat datang di Sistem Manajemen Inventory</p>
@@ -18,7 +21,7 @@
                 <p class="text-gray-500">Barang Keluar</p>
                 <h3 class="text-3xl font-bold text-indigo-600 mt-2">{{$countOutgoing}}</h3>
             </div>
-            <div class="bg-white shadow-sm border border-gray-200 rounded-xl p-6">
+            <div class="bg-white shadow-sm border border-gray-200 rounded-xl p-6 {{($role == 'admin' || $role == 'manager') ? '' : 'hidden' }}">
                 <p class="text-gray-500">Users</p>
                 <h3 class="text-3xl font-bold text-indigo-600 mt-2">{{$countUser}}</h3>
             </div>
@@ -30,7 +33,7 @@
                 <p class="text-gray-500">Customer</p>
                 <h3 class="text-3xl font-bold text-indigo-600 mt-2">{{$countCustomer}}</h3>
             </div>
-            <div class="bg-white shadow-sm border border-gray-200 rounded-xl p-6">
+            <div class="bg-white shadow-sm border border-gray-200 rounded-xl p-6 {{$role == 'manager' ? '' : 'hidden' }}">
                 <p class="text-gray-500">Aktivitas Terbaru</p>
                 <h3 class="text-xl font-bold text-indigo-600 mt-2">{{$activity}}</h3>
             </div>
