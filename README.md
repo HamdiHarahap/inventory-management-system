@@ -104,7 +104,7 @@ Aplikasi ini cocok digunakan untuk:
 5. Sesuaikan file .env dengan konfigurasi database dan pengaturan lainnya.
 6. Jalankan migrasi jika database diperlukan
     ```bash
-    php artisan migrate
+    php artisan migrate --seed
     ```
 7. Jalankan Aplikasi
     ```bash
