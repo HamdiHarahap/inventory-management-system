@@ -152,3 +152,8 @@ Setelah masuk, anda dapat:
 -   Membuat transaksi masuk & keluar
 -   Memeriksa log aktivitas
 -   Melihat stok terkini dari setiap produk
+
+## Demo
+
+https://github.com/user-attachments/assets/1cd30665-e6f2-4e10-9570-2a4ec5fa4f7d
+
