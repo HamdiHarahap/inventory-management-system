@@ -68,6 +68,10 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('role:manager')->group(function () {
         Route::get('/aktivitas', [ActivityLogController::class, 'index'])->name('activity.index');
+
+        Route::get('/cetak-aktivitas', [ActivityLogController::class, 'generatePDF'])->name('activity.pdf');
+        Route::get('/cetak-barang-masuk', [IncomingTransactionController::class, 'generatePDF'])->name('incoming.pdf');
+        Route::get('/cetak-barang-keluar', [OutgoingTransactionController::class, 'generatePDF'])->name('outgoing.pdf');
     });
 
     Route::get('/kategori', [CategoryController::class, 'index'])->name('category.index');
