@@ -29,4 +29,31 @@ class ActivityLogController extends Controller
         ]);
     }
 
+    public function generatePDF(Request $request)
+    {
+        $date = $request->date;
+        $userId = $request->user;
+
+        $activity = ActivityLog::when($date, function ($query) use ($date) {
+                $query->whereDate('created_at', $date);
+            })
+            ->when($userId, function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->orderBy('created_at', 'desc')
+            ->get(); 
+
+        $data = [
+            'title' => 'Log Aktivitas',
+            'activity' => $activity,
+            'filtered_date' => $date,
+            'filtered_user' => $userId,
+        ];
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('activity.pdf', $data);
+
+        return $pdf->stream('log-aktivitas.pdf');
+    }
+
+
 }

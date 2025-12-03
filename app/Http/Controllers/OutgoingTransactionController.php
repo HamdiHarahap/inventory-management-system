@@ -88,4 +88,34 @@ class OutgoingTransactionController extends Controller
 
         return redirect()->route('outgoing.index')->with('success', 'Transaksi keluar berhasil ditambahkan.');
     }
+
+    public function generatePDF(Request $request)
+    {
+        $q = $request->input('keyword');
+
+        $outgoing = TransactionItem::where('transaction_type', 'outgoing')
+            ->with(['outgoing.customer', 'product'])
+            ->when($q, function ($query) use ($q) {
+                $query->whereHas('outgoing.customer', function($q2) use ($q) {
+                    $q2->where('name', 'like', "%$q%");
+                })
+                ->orWhereHas('product', function($q3) use ($q) {
+                    $q3->where('name', 'like', "%$q%");
+                })
+                ->orWhereHas('outgoing', function($q4) use ($q) {
+                    $q4->where('date', 'like', "%$q%");
+                });
+            })
+            ->get(); 
+
+        $data = [
+            'title' => 'Laporan Transaksi Keluar',
+            'outgoing' => $outgoing,
+            'keyword' => $request->keyword
+        ];
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('transaction.outgoing.pdf', $data);
+
+        return $pdf->stream('transaksi-keluar.pdf');
+    }
 }

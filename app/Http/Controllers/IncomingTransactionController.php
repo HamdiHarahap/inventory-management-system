@@ -89,5 +89,33 @@ class IncomingTransactionController extends Controller
         return redirect()->route('incoming.index')->with('success', 'Transaksi masuk berhasil ditambahkan.');
     }
 
+    public function generatePDF(Request $request)
+    {
+        $q = $request->input('keyword');
 
+        $incoming = TransactionItem::where('transaction_type', 'incoming')
+            ->with(['incoming.supplier', 'product'])
+            ->when($q, function ($query) use ($q) {
+                $query->whereHas('incoming.supplier', function($q2) use ($q) {
+                    $q2->where('name', 'like', "%$q%");
+                })
+                ->orWhereHas('product', function($q3) use ($q) {
+                    $q3->where('name', 'like', "%$q%");
+                })
+                ->orWhereHas('incoming', function($q4) use ($q) {
+                    $q4->where('date', 'like', "%$q%");
+                });
+            })
+            ->get(); 
+
+        $data = [
+            'title' => 'Laporan Transaksi Masuk',
+            'incoming' => $incoming,
+            'keyword' => $request->keyword
+        ];
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('transaction.incoming.pdf', $data);
+
+        return $pdf->stream('transaksi-masuk.pdf');
+    }
 }
