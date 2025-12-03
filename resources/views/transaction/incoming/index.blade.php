@@ -31,7 +31,9 @@
             </form>
         </div>
 
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-auto">
+        <a href="{{ route('incoming.pdf', request()->query()) }}" class="px-4 py-2 bg-indigo-600 border border-indigo-500 rounded-lg hover:bg-indigo-700 transition mt-5 text-white {{$role == 'manager' ? '' : 'hidden' }}">Cetak Laporan</a>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-auto mt-5">
             <table class="w-full text-left min-w-max">
                 <thead class="bg-gray-50">
                     <tr>
